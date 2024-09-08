@@ -27,4 +27,6 @@ public class User {
 
     @DBRef // Ref Created to the Connected Collection/Table
     private List<JournalEntry> journalEntries = new ArrayList<>();
+
+    private List<String> roles;
 }

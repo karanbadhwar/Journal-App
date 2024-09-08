@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 //MongoDB Annotation, to make the Table/Collection with this name
-@Document(collection  = "journal_entries")
+@Document(collection = "journal_entries")
 //Lombok Annotations below
 @Data //Note - It does not set @NoArgsConstructor!!!
 //Use Data Annotation or all the below, as @Data is equivalent to all the Annotations below.
@@ -24,6 +24,11 @@ import java.util.Date;
 //@EqualsAndHashCode
 //@Builder
 @NoArgsConstructor //Required to deserialize the JSON to Java Object, as Spring calls the NoArgsConstructor!!
+/*
+The @NoArgsConstructor annotation was likely necessary because of the deserialization process happening in your createEntry method in the controller. When Spring MVC receives a POST request with a JournalEntry JSON payload, it uses a deserialization process (e.g., with Jackson) to convert that JSON into a JournalEntry object. During this process,
+a no-argument constructor is needed to create an instance of JournalEntry before setting its fields.
+Without @NoArgsConstructor, the deserialization process would fail, causing an error when trying to map the JSON data to the JournalEntry object.
+ */
 public class JournalEntry {
 
     @Id
