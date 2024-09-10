@@ -5,6 +5,9 @@ import com.Badhwar.journalApp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,30 +19,42 @@ public class UserEntryController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
-    public List<User> getAllUsers()
-    {
-        return userService.getAllUsers();
-    }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    @PostMapping
-    public void createUser(@RequestBody User user)
-    {
-        userService.saveNewUser(user);
-    }
+    //When the User gets Authenticated, SecurityContextHolder gets the User's Credentials
 
-    @PutMapping("/{userName}")
-    public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable String userName)
+    @PutMapping
+    public ResponseEntity<?> updateUser(@RequestBody User user)
     {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
         User userInDb = userService.findByUserName(userName);
         if(userInDb != null)
         {
             userInDb.setUserName(user.getUserName());
-            userInDb.setPassword(user.getPassword());
+            if(!passwordEncoder.matches( user.getPassword(),userInDb.getPassword()))
+            {
+                userInDb.setPassword(user.getPassword());
+                userService.saveNewUser(userInDb);
+                System.out.println("Password Changed as well");
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
             userService.saveUser(userInDb);
         }
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> deleteUser(@RequestBody User user)
+    {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        userService.deleteByUserName(authentication.getName());
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

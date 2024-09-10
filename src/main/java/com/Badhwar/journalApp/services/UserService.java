@@ -30,7 +30,7 @@ public class UserService {
     public void saveNewUser(User user)
     {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(List.of("USER"));
+        user.setRoles(Arrays.asList("USER"));
         userRepository.save(user);
     }
 
@@ -52,5 +52,10 @@ public class UserService {
     public User findByUserName(String userName)
     {
         return userRepository.findByUserName(userName);
+    }
+
+    public void deleteByUserName(String userName)
+    {
+        userRepository.deleteByUserName(userName);
     }
 }
