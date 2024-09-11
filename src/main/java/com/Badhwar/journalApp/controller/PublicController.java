@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class PublicController {
     @Autowired
     private UserService userService;
+
     @GetMapping("/health-check") //GET Call
     public String healthCheck()
     {

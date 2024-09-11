@@ -21,41 +21,41 @@ public class UserService {
 
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public void saveUser(User user)
-    {
+    public void saveUser(User user) {
         userRepository.save(user);
     }
 
     //Saving Encoded User Password.
-    public void saveNewUser(User user)
-    {
+    public void saveNewUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Arrays.asList("USER"));
         userRepository.save(user);
     }
 
-    public List<User> getAllUsers()
-    {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public Optional<User> findById(ObjectId id)
-    {
+    public Optional<User> findById(ObjectId id) {
         return userRepository.findById(id);
     }
 
-    public void deleteById(ObjectId id)
-    {
+    public void deleteById(ObjectId id) {
         userRepository.deleteById(id);
     }
 
-    public User findByUserName(String userName)
-    {
+    public User findByUserName(String userName) {
         return userRepository.findByUserName(userName);
     }
 
-    public void deleteByUserName(String userName)
-    {
+    public void deleteByUserName(String userName) {
         userRepository.deleteByUserName(userName);
     }
+
+    public void saveAdmin(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles(Arrays.asList("USER", "ADMIN"));
+        userRepository.save(user);
+    }
+
 }
