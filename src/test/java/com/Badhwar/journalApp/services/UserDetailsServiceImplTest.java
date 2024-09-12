@@ -41,7 +41,7 @@ public class UserDetailsServiceImplTest {
         when(userRepository.findByUserName(ArgumentMatchers.anyString()))
                 .thenReturn(User.builder()
                         .userName("Karan")
-                        .password("abcdefg")
+                        .password("")
                         .roles(new ArrayList<>())
                         .build());
         UserDetails user = userDetailsServices.loadUserByUsername("Karan");
