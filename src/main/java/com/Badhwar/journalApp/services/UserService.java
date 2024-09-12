@@ -26,10 +26,17 @@ public class UserService {
     }
 
     //Saving Encoded User Password.
-    public void saveNewUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(Arrays.asList("USER"));
-        userRepository.save(user);
+    public boolean saveNewUser(User user) {
+        try
+        {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setRoles(Arrays.asList("USER"));
+            userRepository.save(user);
+            return true;
+        } catch(Exception e)
+        {
+            return false;
+        }
     }
 
     public List<User> getAllUsers() {
