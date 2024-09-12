@@ -34,8 +34,9 @@ public class UserServiceTests {
         System.out.println("Running Before All");
     }
 
-    @AfterEach // Similarly, runs after each method
-    @AfterAll //Runs once after all teh methods have been executed
+//    @AfterEach // Similarly, runs after each method
+//    @AfterAll //Runs once after all teh methods have been executed
+
 
     @Test
     public void testFindByUserName()
