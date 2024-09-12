@@ -2,8 +2,7 @@ package com.Badhwar.journalApp.services;
 
 import com.Badhwar.journalApp.entity.User;
 import com.Badhwar.journalApp.repository.UserRepository;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,21 @@ public class UserServiceTests {
     @Autowired
     private UserService userService;
 
-    @Disabled
+    @BeforeEach //This means, this method will run before running each and every Test
+    public void setUp()
+    {
+        System.out.println("Running Before Each");
+    }
+
+    @BeforeAll //This means, it will run once before testing all tests
+    public static void setAll()
+    {
+        System.out.println("Running Before All");
+    }
+
+    @AfterEach // Similarly, runs after each method
+    @AfterAll //Runs once after all teh methods have been executed
+
     @Test
     public void testFindByUserName()
     {
@@ -33,18 +46,19 @@ public class UserServiceTests {
         assertTrue(!user.getJournalEntries().isEmpty());
     }
 
-    @Disabled
+
     @ParameterizedTest
-//    @ValueSource(strings = {
-//            "Karan",
-//            "Badhwar Karan"
-//    })
-    @ArgumentsSource(userArgumentsProvider.class)
+    @ValueSource(strings = {
+            "Karan",
+            "Badhwar Karan"
+    })
+//    @ArgumentsSource(userArgumentsProvider.class)
     public void testFindByUserNameWithParams(String userName)
     {
         assertNotNull(userRepository.findByUserName(userName), "Failed for: "+userName);
     }
 
+    @Disabled
     @ParameterizedTest
     @ArgumentsSource(userArgumentsProvider.class)
     public void testAddingUser(User user)
