@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: Journal App
+  main:
+    allow-circular-references: true
+  data:
+    mongodb:
+      uri: mongodb+srv://kbb914:Ronaldo07$@journal.ltwg8.mongodb.net/?retryWrites=true&w=majority&appName=Journal
+      database: journaldb
+      auto-index-creation: true
+
+server:
+  port: 8080
+  servlet:
+    context-path: /journal
+

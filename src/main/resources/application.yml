@@ -1,19 +1,13 @@
-#spring.application.name=Journal App
-#spring.main.allow-circular-references=true
-#spring.main.allow-circular-references=true
 spring:
-  application:
-    name: Journal App
-  main:
-    allow-circular-references: true
-  data:
-    mongodb:
-      uri: mongodb+srv://kbb914:Ronaldo07$@journal.ltwg8.mongodb.net/?retryWrites=true&w=majority&appName=Journal
-      database: journaldb
-      auto-index-creation: true
+  profiles:
+    active: dev
 
-server:
-  port: 8080
-  servlet:
-    context-path: /journal
+# Creating profiles are very usual process for Development and production.
+  #Multiple ways to do that:-
+   #Not fixing in application.ym/properties file instead giving at the Command line, or setting config in intellij,...
 
+#Can Make Changes to the configuration of the Intellij configuration to run until in Intellij
+#spring.profiles.active=dev in Edit Configuration
+
+#In production, when we run the jar
+  # ex - java -jar ....path --spring.profiles.active=...
