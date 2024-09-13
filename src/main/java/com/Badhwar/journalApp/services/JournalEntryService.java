@@ -4,6 +4,8 @@ import com.Badhwar.journalApp.entity.JournalEntry;
 import com.Badhwar.journalApp.entity.User;
 import com.Badhwar.journalApp.repository.JournalEntryRepository;
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,9 @@ public class JournalEntryService {
     @Autowired
     private UserService userService;
 
+    //Logger Instance
+    private static final Logger logger = LoggerFactory.getLogger(JournalEntryService.class);
+
     //Transactional annotation, mean that whatever is written inside the Method should complete, if something fails roll back everything
     @Transactional //This achieves Atomicity & Isolation
     public void saveEntry(JournalEntry entry, String userName)
@@ -33,7 +38,7 @@ public class JournalEntryService {
             userService.saveUser(user); //Saving the user to update its Journal Entries List
         } catch(Exception e)
         {
-            System.out.println(e);
+//            logger.info("Error at hhahahaha");
             throw new RuntimeException("An Error occurred while saving the entry. ", e);
         }
 

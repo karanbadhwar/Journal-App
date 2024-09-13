@@ -3,7 +3,10 @@ package com.Badhwar.journalApp.services;
 import com.Badhwar.journalApp.entity.JournalEntry;
 import com.Badhwar.journalApp.entity.User;
 import com.Badhwar.journalApp.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,10 +17,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+@Slf4j
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+//    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -35,6 +41,11 @@ public class UserService {
             return true;
         } catch(Exception e)
         {
+            log.error("Error Occurred for {}: ", user.getUserName());
+            log.warn("Error Occurred for {}: ", user.getUserName());
+            log.info("Error Occurred for {}: ", user.getUserName());
+            log.debug("Error Occurred for {}: ", user.getUserName());
+            log.trace("Error Occurred for {}: ", user.getUserName());
             return false;
         }
     }
