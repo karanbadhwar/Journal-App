@@ -1,0 +1,3 @@
+24-09-14 09:20:00.070 [http-nio-8080-exec-4] ERROR c.B.journalApp.services.UserService -- Error Occurred for Shree Ram:   
+24-09-14 09:20:00.072 [http-nio-8080-exec-4] WARN  c.B.journalApp.services.UserService -- Error Occurred for Shree Ram:   
+24-09-14 09:20:00.073 [http-nio-8080-exec-4] INFO  c.B.journalApp.services.UserService -- Error Occurred for Shree Ram:   
