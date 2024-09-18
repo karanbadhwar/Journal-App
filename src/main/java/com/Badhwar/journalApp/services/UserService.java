@@ -36,16 +36,16 @@ public class UserService {
         try
         {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setRoles(Arrays.asList("USER"));
+            user.setRoles(List.of("USER"));
             userRepository.save(user);
             return true;
         } catch(Exception e)
         {
             log.error("Error Occurred for {}: ", user.getUserName());
-            log.warn("Error Occurred for {}: ", user.getUserName());
-            log.info("Error Occurred for {}: ", user.getUserName());
-            log.debug("Error Occurred for {}: ", user.getUserName());
-            log.trace("Error Occurred for {}: ", user.getUserName());
+//            log.warn("Error Occurred for {}: ", user.getUserName());
+//            log.info("Error Occurred for {}: ", user.getUserName());
+//            log.debug("Error Occurred for {}: ", user.getUserName());
+//            log.trace("Error Occurred for {}: ", user.getUserName());
             return false;
         }
     }
