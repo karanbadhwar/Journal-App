@@ -2,6 +2,12 @@ spring:
   profiles:
     active: dev
 
+Weather_Api_Key: fe67890b57176c3dc7bf588b505c5f68
+
+Weather:
+  Api:
+    Key: fe67890b57176c3dc7bf588b505c5f68
+
 #------------------------------------------------------------------------------------------------------------------
 #Logging
 #Setting up the logging level in .yml file, but it is better doing it in the XML FIle.
