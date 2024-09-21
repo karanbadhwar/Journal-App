@@ -26,7 +26,7 @@ public class User {
 
     
     private String email;
-    private boolean sentimentsAnalysis;
+    private boolean sentimentAnalysis;
 
     @NonNull
     private String password;

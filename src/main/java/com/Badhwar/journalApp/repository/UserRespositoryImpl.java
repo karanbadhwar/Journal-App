@@ -18,13 +18,13 @@ public class UserRespositoryImpl {
     public List<User> getUserforSA()
     {
         Query query = new Query();
-        query.addCriteria(Criteria.where("sentimentsAnalysis").is(true));
+        query.addCriteria(Criteria.where("email").regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,6}$"));
+;        query.addCriteria(Criteria.where("sentimentsAnalysis").is(true));
 
         //OR Statement
 //        Criteria criteria = new Criteria();
 //        query.addCriteria(criteria.orOperator(//First Query, //SecondQuery));
-        List<User> users = mongoTemplate.find(query, User.class);
-        return users;
+        return mongoTemplate.find(query, User.class);
 
     }
 

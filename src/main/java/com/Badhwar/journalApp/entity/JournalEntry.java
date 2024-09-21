@@ -3,6 +3,7 @@ package com.Badhwar.journalApp.entity;
 //POJO File
 //Lombok -> creates getters, setters and all the BoilerPlate code at compilation based on annotations!!
 
+import com.Badhwar.journalApp.enums.Sentiment;
 import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -40,6 +41,8 @@ public class JournalEntry {
     private String content;
 
     private LocalDateTime date;
+
+    private Sentiment sentiment;
 
 //    //Date
 //    public LocalDateTime getDate() {

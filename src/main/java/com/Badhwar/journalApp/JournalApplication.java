@@ -7,12 +7,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.MongoTransactionManager;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication // Annotates the Starting point of the application
 @EnableTransactionManagement // Only applies to the Main Class and let us uses the Transaction annotation inside the application.
+@EnableScheduling
 public class JournalApplication {
 
 	public static void main(String[] args) {
