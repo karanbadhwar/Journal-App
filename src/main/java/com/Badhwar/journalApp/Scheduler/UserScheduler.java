@@ -6,7 +6,6 @@ import com.Badhwar.journalApp.entity.User;
 import com.Badhwar.journalApp.enums.Sentiment;
 import com.Badhwar.journalApp.repository.UserRespositoryImpl;
 import com.Badhwar.journalApp.services.EmailService;
-import com.Badhwar.journalApp.services.SentimentsAnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

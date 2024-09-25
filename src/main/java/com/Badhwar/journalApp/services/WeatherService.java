@@ -25,14 +25,27 @@ public class WeatherService {
     @Autowired
     private AppCache appCacheC;
 
+    @Autowired
+    private RedisService redisService;
+
     //Get CAll to External API
     public WeatherResponse getWeather(String city)
     {
-        AppCache.Keys weatherApi = AppCache.Keys.WEATHER_API;
-        String finalAPI =  appCacheC.appCache.get(AppCache.Keys.WEATHER_API.toString()).replace(PlaceHolders.city, city).replace(PlaceHolders.apiKey, apiKey);
-        ResponseEntity<WeatherResponse> response = restTemplate.exchange(finalAPI, HttpMethod.GET, null, WeatherResponse.class);
-        WeatherResponse body = response.getBody();
-        return body;
+        WeatherResponse weatherResponse = redisService.get("Weather of " + city, WeatherResponse.class);
+        if(weatherResponse != null)
+        {
+            return weatherResponse;
+        } else {
+            String finalAPI =  appCacheC.appCache.get(AppCache.Keys.WEATHER_API.toString()).replace(PlaceHolders.city, city).replace(PlaceHolders.apiKey, apiKey);
+            ResponseEntity<WeatherResponse> response = restTemplate.exchange(finalAPI, HttpMethod.GET, null, WeatherResponse.class);
+            WeatherResponse body = response.getBody();
+            if(body != null)
+            {
+                redisService.set("Weather of " + city, body, 300l);
+            }
+            return body;
+        }
+
     }
 
     //POST Call To External API
