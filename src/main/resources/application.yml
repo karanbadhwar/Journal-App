@@ -1,6 +1,10 @@
 spring:
   profiles:
     active: dev
+  redis:
+    host: redis-10041.c273.us-east-1-2.ec2.redns.redis-cloud.com
+    port: 10041
+    password: 44BgmXel2oBCToWBOyeQ0a6FYpsh9cMv
 
 Weather_Api_Key: fe67890b57176c3dc7bf588b505c5f68
 
