@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: Journal App
+  main:
+    allow-circular-references: true
+  data:
+    mongodb:
+      uri: mongodb+srv://kbb914:Ronaldo07$@journal.ltwg8.mongodb.net/?retryWrites=true&w=majority&appName=Journal
+      database: journaldb
+      auto-index-creation: true
+  mail:
+    host: smtp.gmail.com
+    port : 587
+    username: jforjacob04@gmail.com
+    password: yvla agnk oiqp gopw
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+#  kafka:
+#    bootstrap-servers: aws.confluent.cloud:9092
+#    producer:
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#    consumer:
+#      group-id: weekly-sentiment-group
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+#      properties:
+#        spring:
+#          json:
+#            trusted:
+#              packages: com.badhwar.journalApp.model
+#    properties:
+#      security:
+#        protocol: SASL_SSL
+#      sasl:
+#        mechanism: PLAIN
+#        jaas:
+#          config: org.apache.kafka.common.security.plain.PlainLoginModule required username='xxxxx' password='xxxxxxxxxxxxxx';
+#      session:
+#        timeout:
+#          ms: 45000
+
+server:
+  port: 8080
+  servlet:
+    context-path: /journal
+

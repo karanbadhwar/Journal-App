@@ -4,9 +4,11 @@ import com.Badhwar.journalApp.Cache.AppCache;
 import com.Badhwar.journalApp.entity.JournalEntry;
 import com.Badhwar.journalApp.entity.User;
 import com.Badhwar.journalApp.enums.Sentiment;
+import com.Badhwar.journalApp.model.SentimentData;
 import com.Badhwar.journalApp.repository.UserRespositoryImpl;
 import com.Badhwar.journalApp.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +32,9 @@ public class UserScheduler {
 
     @Autowired
     private AppCache appCache;
+
+    @Autowired
+    private KafkaTemplate<String, SentimentData> kafkaTemplate;
 
     @Scheduled(cron = "0 0 9 * * Sun")
 //    @Scheduled(cron = "0 * * ? * * ")
@@ -57,6 +62,13 @@ public class UserScheduler {
             {
                 emailService.sendEmail(user.getEmail(), "Sentiments for last 7 days ", mostFrequentSentiment.toString());
             }
+
+            // Kafka Cloud account not created !!!! CREDIT CARD ISSUE
+//            if(mostFrequentSentiment != null)
+//            {
+//              SentimentData sentimentData = SentimentData.builder().email(user.getEmail()).sentiment("Sentiment for last 7 days "+mostFrequentSentiment).build();
+//              kafkaTemplate.send("weekly-sentiments", sentimentData.getEmail(), sentimentData);
+//            }
 
 //            String sentiment = sentimentsAnalysisService.sentiments(entry);
 //            emailService.sendEmail(user.getEmail(), "Sentiments for last 7 days", entry);
