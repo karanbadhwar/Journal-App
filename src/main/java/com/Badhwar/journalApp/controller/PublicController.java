@@ -1,13 +1,16 @@
 package com.Badhwar.journalApp.controller;
 
 import com.Badhwar.journalApp.entity.User;
+import com.Badhwar.journalApp.services.UserDetailsServicesImpl;
 import com.Badhwar.journalApp.services.UserService;
+import com.Badhwar.journalApp.utils.JwtUtils;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,11 +18,21 @@ import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+@Slf4j
 @RestController
 @RequestMapping("/public")
 public class PublicController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserDetailsServicesImpl userDetailsServices;
+
+    @Autowired
+    private JwtUtils jwtUtils;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -29,10 +42,26 @@ public class PublicController {
     {
         return "OK";
     }
-    @PostMapping("/create-user")
-    public void createUser(@RequestBody User user)
+    @PostMapping("/signup")
+    public void signup(@RequestBody User user)
     {
         userService.saveNewUser(user);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody User user)
+    {
+        try{
+            //This will authenticate user bu internally using our UserDetailsServiceImpl and use the PassEncoder Bean we created
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword()));
+            UserDetails userDetails = userDetailsServices.loadUserByUsername(user.getUserName());
+            String jwt = jwtUtils.generateToken(userDetails.getUsername());
+            return new ResponseEntity<>(jwt,HttpStatus.OK);
+        } catch(Exception e)
+        {
+            log.error("Exception occurred while createAuthenticationToken " + e);
+            return  new ResponseEntity<>("Incorrect Username or Password", HttpStatus.BAD_REQUEST);
+        }
     }
 
     //Hitting Eleven Labs API

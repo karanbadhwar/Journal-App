@@ -1,0 +1,3 @@
+24-10-02 08:05:15.912 [http-nio-8080-exec-1] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver -- Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]  
+24-10-02 08:05:25.499 [http-nio-8080-exec-3] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver -- Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]  
+24-10-02 08:05:39.083 [http-nio-8080-exec-4] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver -- Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]  
