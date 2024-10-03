@@ -52,7 +52,7 @@ public class PublicController {
     public ResponseEntity<String> login(@RequestBody User user)
     {
         try{
-            //This will authenticate user bu internally using our UserDetailsServiceImpl and use the PassEncoder Bean we created
+            //This will authenticate user by internally using our UserDetailsServiceImpl and use the PassEncoder Bean we created
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword()));
             UserDetails userDetails = userDetailsServices.loadUserByUsername(user.getUserName());
             String jwt = jwtUtils.generateToken(userDetails.getUsername());
