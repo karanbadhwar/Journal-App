@@ -60,7 +60,14 @@ public class UserScheduler {
 
             if(mostFrequentSentiment != null)
             {
-                emailService.sendEmail(user.getEmail(), "Sentiments for last 7 days ", mostFrequentSentiment.toString());
+             SentimentData sentimentData = SentimentData.builder().email(user.getEmail()).sentiment("Sentiment for last 7 days "+mostFrequentSentiment).build();
+             try {
+//                 emailService.sendEmail(user.getEmail(), "Sentiments for last 7 days ", mostFrequentSentiment.toString());
+                 emailService.sendEmail(sentimentData.getEmail(), "sentiment for previous week", sentimentData.getSentiment());
+             } catch(Exception e)
+             {
+                 kafkaTemplate.send("weekly-sentiments", sentimentData.getEmail(), sentimentData);
+             }
             }
 
             // Kafka Cloud account not created !!!! CREDIT CARD ISSUE
