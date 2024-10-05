@@ -21,6 +21,7 @@ target/
 application.properties
 .yml
 .log
+logback.xml
 
 ### NetBeans ###
 /nbproject/private/
