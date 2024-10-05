@@ -40,6 +40,7 @@ public class PublicController {
     @GetMapping("/health-check") //GET Call
     public String healthCheck()
     {
+        log.info("Health is OK");
         return "OK";
     }
     @PostMapping("/signup")
