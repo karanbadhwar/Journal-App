@@ -24,7 +24,6 @@ public class User {
     @NonNull // Lombok's annotation, as while setting the Field, Lombok's processor will check if it is empty or not
     private String userName;
 
-    
     private String email;
     private boolean sentimentAnalysis;
 

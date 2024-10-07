@@ -3,6 +3,7 @@ package com.Badhwar.journalApp.controller;
 import com.Badhwar.journalApp.Cache.AppCache;
 import com.Badhwar.journalApp.entity.User;
 import com.Badhwar.journalApp.services.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
+@Tag(name="Admin APIs")
 public class AdminController {
 
     @Autowired

@@ -1,9 +1,11 @@
 package com.Badhwar.journalApp.controller;
 
+import com.Badhwar.journalApp.DTO.UserDto;
 import com.Badhwar.journalApp.entity.User;
 import com.Badhwar.journalApp.services.UserDetailsServicesImpl;
 import com.Badhwar.journalApp.services.UserService;
 import com.Badhwar.journalApp.utils.JwtUtils;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import java.io.IOException;
 @Slf4j
 @RestController
 @RequestMapping("/public")
+@Tag(name="Public APIs") //Tag Name changed for Swagger
 public class PublicController {
     @Autowired
     private UserService userService;
@@ -43,6 +46,19 @@ public class PublicController {
         log.info("Health is OK");
         return "OK";
     }
+
+    //Using DTO, as SonarLint gave changes needed highlights
+//    @PostMapping("/signup")
+//    public void signup(@RequestBody UserDto user)
+//    {
+//        User newUser = new User();
+//        newUser.setEmail(user.getEmail());
+//        newUser.setUserName(user.getUserName());
+//        newUser.setPassword(user.getPassword());
+//        newUser.setSentimentAnalysis(user.isSentimentAnalysis());
+//        userService.saveNewUser(newUser);
+//    }
+
     @PostMapping("/signup")
     public void signup(@RequestBody User user)
     {
